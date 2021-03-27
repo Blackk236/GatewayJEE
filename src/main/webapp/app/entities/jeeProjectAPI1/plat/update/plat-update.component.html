@@ -1,0 +1,115 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-plat-heading" data-cy="PlatCreateUpdateHeading" jhiTranslate="jeeProjectGatApp.jeeProjectApi1Plat.home.createOrEditLabel">
+        Create or edit a Plat
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jeeProjectGatApp.jeeProjectApi1Plat.libelle" for="field_libelle">Libelle</label>
+          <input type="text" class="form-control" name="libelle" id="field_libelle" data-cy="libelle" formControlName="libelle" />
+          <div *ngIf="editForm.get('libelle')!.invalid && (editForm.get('libelle')!.dirty || editForm.get('libelle')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('libelle')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jeeProjectGatApp.jeeProjectApi1Plat.prixUnitaire" for="field_prixUnitaire"
+            >Prix Unitaire</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="prixUnitaire"
+            id="field_prixUnitaire"
+            data-cy="prixUnitaire"
+            formControlName="prixUnitaire"
+          />
+          <div
+            *ngIf="editForm.get('prixUnitaire')!.invalid && (editForm.get('prixUnitaire')!.dirty || editForm.get('prixUnitaire')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('prixUnitaire')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('prixUnitaire')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jeeProjectGatApp.jeeProjectApi1Plat.quantite" for="field_quantite"
+            >Quantite</label
+          >
+          <input type="number" class="form-control" name="quantite" id="field_quantite" data-cy="quantite" formControlName="quantite" />
+          <div *ngIf="editForm.get('quantite')!.invalid && (editForm.get('quantite')!.dirty || editForm.get('quantite')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('quantite')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('quantite')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label jhiTranslate="jeeProjectGatApp.jeeProjectApi1Plat.boisson" for="field_boissons">Boisson</label>
+          <select class="form-control" id="field_boissons" data-cy="boisson" multiple name="boissons" formControlName="boissons">
+            <option
+              [ngValue]="getSelectedBoisson(boissonOption, editForm.get('boissons')!.value)"
+              *ngFor="let boissonOption of boissonsSharedCollection; trackBy: trackBoissonById"
+            >
+              {{ boissonOption.libelle }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

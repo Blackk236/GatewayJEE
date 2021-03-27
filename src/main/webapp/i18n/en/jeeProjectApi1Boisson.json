@@ -1,0 +1,29 @@
+{
+  "jeeProjectGatApp": {
+    "jeeProjectApi1Boisson": {
+      "home": {
+        "title": "Boissons",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Boisson",
+        "createOrEditLabel": "Create or edit a Boisson",
+        "notFound": "No Boissons found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Boisson {{ id }}?"
+      },
+      "detail": {
+        "title": "Boisson"
+      },
+      "id": "ID",
+      "libelle": "Libelle",
+      "plat": "Plat"
+    }
+  },
+  "jeeProjectApi1App": {
+    "jeeProjectApi1Boisson": {
+      "created": "A new Boisson is created with identifier {{ param }}",
+      "updated": "A Boisson is updated with identifier {{ param }}",
+      "deleted": "A Boisson is deleted with identifier {{ param }}"
+    }
+  }
+}

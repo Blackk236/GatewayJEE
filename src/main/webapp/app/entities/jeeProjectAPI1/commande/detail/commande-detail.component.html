@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="commande">
+      <h2 data-cy="commandeDetailsHeading"><span jhiTranslate="jeeProjectGatApp.jeeProjectApi1Commande.detail.title">Commande</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ commande.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jeeProjectGatApp.jeeProjectApi1Commande.numero">Numero</span></dt>
+        <dd>
+          <span>{{ commande.numero }}</span>
+        </dd>
+        <dt><span jhiTranslate="jeeProjectGatApp.jeeProjectApi1Commande.date">Date</span></dt>
+        <dd>
+          <span>{{ commande.date | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="jeeProjectGatApp.jeeProjectApi1Commande.plat">Plat</span></dt>
+        <dd>
+          <span *ngFor="let plat of commande.plats; let last = last">
+            <a [routerLink]="['/plat', plat?.id, 'view']">{{ plat.libelle }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/commande', commande.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
